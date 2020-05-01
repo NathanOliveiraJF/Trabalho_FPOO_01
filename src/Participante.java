@@ -14,6 +14,7 @@ public class Participante {
         this.golsSofridos = 0;
         this.vitorias = 0;
         this.bonusArtilheiro = false;
+        this.time = new Time();
     }
 
     public String getNome() {

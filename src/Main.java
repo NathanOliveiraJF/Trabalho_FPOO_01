@@ -5,7 +5,10 @@ public class Main {
     public static void main(String[] args) {
         Campeonato c = new Campeonato();
 
-        c.cadastraParticipante(new Participante("Breno"));
+        Participante breno = new Participante("Breno");
+        breno.setTime(c.getTime(0));
+        c.cadastraParticipante(breno);
+
         c.cadastraParticipante(new Participante("Nathan"));
         c.cadastraParticipante(new Participante("Jorge"));
         c.cadastraParticipante(new Participante("Gustavo"));
@@ -17,6 +20,9 @@ public class Main {
 
         System.out.println("Imprimindo a tabela de partidas...");
         System.out.print(c.getTabelaPartidas());
+
+        System.out.println("\n===== Lista de times disponíveis ======");
+        System.out.println(c.listTimesDisponiveis());
 
 	    // Chama o metodo que popula a lista de times.
     }

@@ -5,10 +5,11 @@ public class Time {
     private String nome;
 
     public Time() {
-        jogadores = new ArrayList<>();
+        this.nome = "";
+        this.jogadores = new ArrayList<>();
     }
     public Time (String nome) {
-        jogadores = new ArrayList<>();
+        this.jogadores = new ArrayList<>();
         this.nome = nome;
     }
 
