@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class Campeonato {
-    private ArrayList<Participante>participantes = new ArrayList<>();
+    private ArrayList<Participante> participantes;
 
     public Campeonato() {
-
+        participantes =  new ArrayList<Participante>();
     }
 
     private void cadastrarParticipantes(Participante participante) {

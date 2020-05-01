@@ -1,14 +1,13 @@
 public class Partida {
     private Participante participanteA;
     private Participante participanteB;
-    private int golsPa;
-    private int golsPb;
+    private int golsA;
+    private int golsB;
 
-    public Partida(Participante participanteA, Participante participanteB, int golsPa, int golsPb) {
+    public Partida() {}
+    public Partida(Participante participanteA, Participante participanteB) {
         this.participanteA = participanteA;
         this.participanteB = participanteB;
-        this.golsPa = golsPa;
-        this.golsPb = golsPb;
     }
 
     public Participante defineGanhador() {
@@ -18,7 +17,6 @@ public class Partida {
     public Participante getParticipanteA() {
         return participanteA;
     }
-
     public void setParticipanteA(Participante participanteA) {
         this.participanteA = participanteA;
     }
@@ -26,24 +24,21 @@ public class Partida {
     public Participante getParticipanteB() {
         return participanteB;
     }
-
     public void setParticipanteB(Participante participanteB) {
         this.participanteB = participanteB;
     }
 
-    public int getGolsPa() {
-        return golsPa;
+    public int getGolsA() {
+        return golsA;
+    }
+    public void setGolsA(int golsA) {
+        this.golsA = golsA;
     }
 
-    public void setGolsPa(int golsPa) {
-        this.golsPa = golsPa;
+    public int getGolsB() {
+        return golsB;
     }
-
-    public int getGolsPb() {
-        return golsPb;
-    }
-
-    public void setGolsPb(int golsPb) {
-        this.golsPb = golsPb;
+    public void setGolsB(int golsB) {
+        this.golsB = golsB;
     }
 }

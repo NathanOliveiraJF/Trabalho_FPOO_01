@@ -5,10 +5,27 @@ public class Participante {
     private int vitorias;
     private boolean bonusArtilheiro;
 
-    public Participante(String nome, int golsFeitos, int vitorias, boolean bonusArtilheiro) {
+    public Participante() {}
+    public Participante(String nome) {
         this.nome = nome;
-        this.golsFeitos = golsFeitos;
-        this.vitorias = vitorias;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getVitorias() {
+        return vitorias;
+    }
+
+
+    public boolean isBonusArtilheiro() {
+        return bonusArtilheiro;
+    }
+    public void setBonusArtilheiro(boolean bonusArtilheiro) {
         this.bonusArtilheiro = bonusArtilheiro;
     }
 
@@ -26,46 +43,5 @@ public class Participante {
 
     public void addVitoria() {
 
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public int getGolsFeitos() {
-        return golsFeitos;
-    }
-
-    public void setGolsFeitos(int golsFeitos) {
-        this.golsFeitos = golsFeitos;
-    }
-
-    public int getVitorias() {
-        return vitorias;
-    }
-
-
-    public int getGolsSofridos() {
-        return golsSofridos;
-    }
-
-    public void setGolsSofridos(int golsSofridos) {
-        this.golsSofridos = golsSofridos;
-    }
-
-    public void setVitorias(int vitorias) {
-        this.vitorias = vitorias;
-    }
-
-    public boolean isBonusArtilheiro() {
-        return bonusArtilheiro;
-    }
-
-    public void setBonusArtilheiro(boolean bonusArtilheiro) {
-        this.bonusArtilheiro = bonusArtilheiro;
     }
 }
