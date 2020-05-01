@@ -60,7 +60,7 @@ public class Campeonato {
                 ArrayList<Partida> jogosRodada = new ArrayList<Partida>();
 
                 for (Partida jogo : partidasAux) {
-                    if (jogo.geRodada() == 0) {
+                    if (jogo.getRodada() == 0) {
                         jogosRodada.add(jogo);
                     }
                 }
@@ -125,7 +125,7 @@ public class Campeonato {
         Participante pArtilheiro = new Participante();
 
         for (Participante p : participantes) {
-            if (p.artilheiro().getGols > artilheiro.getGols()) {
+            if (p.artilheiro().getGols() > artilheiro.getGols()) {
                 artilheiro = p.artilheiro();
                 pArtilheiro = p;
             }

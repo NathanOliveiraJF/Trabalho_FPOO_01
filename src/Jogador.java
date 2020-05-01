@@ -17,7 +17,8 @@ public class Jogador {
     public int getGols() {
         return gols;
     }
-    public void addGols(int gols) {
+
+    public void addGol(int gols) {
         this.gols += gols;
     }
 }

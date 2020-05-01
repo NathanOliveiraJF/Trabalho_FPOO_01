@@ -6,27 +6,38 @@ public class Participante {
     private boolean bonusArtilheiro;
     private Time time;
 
-    public Participante() {}
+    public Participante() {
+        this.nome = "";
+        this.golsFeitos = 0;
+        this.golsSofridos = 0;
+        this.vitorias = 0;
+        this.bonusArtilheiro = false;
+    }
     public Participante(String nome) {
         this.nome = nome;
+        this.golsFeitos = 0;
+        this.golsSofridos = 0;
+        this.vitorias = 0;
+        this.bonusArtilheiro = false;
     }
 
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public int getGolsFeitos() {
+    public int getGolFeito() {
         return golsFeitos;
     }
 
-    public int getGolsSofridos() {
+    public int getGolSofrido() {
         return golsSofridos;
     }
 
-    public int getVitorias() {
+    public int getVitoria() {
         return vitorias;
     }
 
@@ -40,23 +51,37 @@ public class Participante {
     public boolean isBonusArtilheiro() {
         return bonusArtilheiro;
     }
-    public void setBonusArtilheiro(boolean bonusArtilheiro) {
-        this.bonusArtilheiro = bonusArtilheiro;
+
+    public void setBonusArtilheiro() {
+        this.bonusArtilheiro = true;
     }
 
-    public int calculaPontos() {
-        return 0;
+    public double calculaPontos() {
+        double pontos = 0;
+
+        if(this.bonusArtilheiro){
+            pontos += 5;
+        }
+
+        pontos += (3 * this.vitorias) + this.golsFeitos + (this.golsSofridos * 0.5);
+
+        return pontos ;
     }
 
-    public void addGolFeito() {
+    public void addGolFeito(int numGol) {
+        this.golsFeitos += numGol;
 
     }
 
-    public void addGolSofrido() {
-
+    public void addGolSofrido(int numGol) {
+        this.golsSofridos += numGol;
     }
 
     public void addVitoria() {
+        this.vitorias++;
+    }
 
+    public Jogador artilheiro(){
+        return time.artilheiro();
     }
 }

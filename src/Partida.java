@@ -3,6 +3,7 @@ public class Partida {
     private Participante participanteB;
     private int golsA;
     private int golsB;
+    private int rodada;
 
     public Partida() {}
     public Partida(Participante participanteA, Participante participanteB) {
@@ -39,6 +40,17 @@ public class Partida {
     }
 
     public Participante defineGanhador() {
-        return null;
+        if(this.golsA > this.golsB){
+            return this.participanteA;
+        }
+        return this.participanteB;
+    }
+
+    public void setRodada(int rodada) {
+        this.rodada = rodada;
+    }
+
+    public int getRodada() {
+        return rodada;
     }
 }
