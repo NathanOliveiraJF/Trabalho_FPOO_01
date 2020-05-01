@@ -10,10 +10,6 @@ public class Partida {
         this.participanteB = participanteB;
     }
 
-    public Participante defineGanhador() {
-        return null;
-    }
-
     public Participante getParticipanteA() {
         return participanteA;
     }
@@ -40,5 +36,9 @@ public class Partida {
     }
     public void setGolsB(int golsB) {
         this.golsB = golsB;
+    }
+
+    public Participante defineGanhador() {
+        return null;
     }
 }

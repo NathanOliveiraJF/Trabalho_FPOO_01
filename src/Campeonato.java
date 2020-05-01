@@ -2,24 +2,28 @@ import java.util.ArrayList;
 
 public class Campeonato {
     private ArrayList<Participante> participantes;
+    private ArrayList<Partida> partidas;
 
     public Campeonato() {
         participantes =  new ArrayList<Participante>();
+        partidas =  new ArrayList<Partida>();
     }
 
-    private void cadastrarParticipantes(Participante participante) {
+    private void cadastraParticipante(Participante participante) {
         this.participantes.add(participante);
     }
-
     public ArrayList<Participante> getParticipantes() {
         return participantes;
     }
 
-    public String gerarTabelaJogos() {
+    public void geraTabelaJogos() {
+        return;
+    }
+    public String getTabelaJogos() {
         return "";
     }
 
-    public String gerarRanking() {
+    public String geraRanking() {
         return "";
     }
 
@@ -31,7 +35,7 @@ public class Campeonato {
         return jogador;
     }
 
-    public void pontosArtilheiro(Participante participante) {
+    public void marcaPontosArtilheiro(Participante participante) {
 
     }
 }

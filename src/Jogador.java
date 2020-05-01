@@ -2,6 +2,7 @@ public class Jogador {
     private String nome;
     private int gols;
 
+    public Jogador () {}
     public Jogador (String nome) {
         this.nome = nome;
     }

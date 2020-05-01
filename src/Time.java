@@ -25,4 +25,8 @@ public class Time {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public Jogador artilheiro() {
+        return new Jogador();
+    }
 }

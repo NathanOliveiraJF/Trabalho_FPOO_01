@@ -4,6 +4,7 @@ public class Participante {
     private int golsSofridos;
     private int vitorias;
     private boolean bonusArtilheiro;
+    private Time time;
 
     public Participante() {}
     public Participante(String nome) {
@@ -17,10 +18,24 @@ public class Participante {
         this.nome = nome;
     }
 
+    public int getGolsFeitos() {
+        return golsFeitos;
+    }
+
+    public int getGolsSofridos() {
+        return golsSofridos;
+    }
+
     public int getVitorias() {
         return vitorias;
     }
 
+    public Time getTime() {
+        return time;
+    }
+    public void setTime(Time time) {
+        this.time = time;
+    }
 
     public boolean isBonusArtilheiro() {
         return bonusArtilheiro;
