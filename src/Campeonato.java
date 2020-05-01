@@ -105,6 +105,12 @@ public class Campeonato {
     }
 
     public String geraRanking() {
+        String ranking = "";
+
+        for (int i = 1; i <= participantes.size(); i++) {
+            ranking += "#" + i + " - " + participantes.get(i).getNome() + "(" + participantes.get(i).calculaPontos() + ")";
+        }
+
         return "";
     }
 

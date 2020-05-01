@@ -1,4 +1,5 @@
 public class Participante {
+    // TODO: implementar o comparable etc etc https://howtodoinjava.com/sort/collections-sort/
     private String nome;
     private int golsFeitos;
     private int golsSofridos;
