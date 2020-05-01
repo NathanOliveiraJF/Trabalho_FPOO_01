@@ -37,8 +37,15 @@ public class Campeonato {
     public String getTabelaPartidas() {
         String tabela = "";
 
-        for (Partida p : partidas) {
-            tabela += p.getParticipanteA().getNome() + " X " + p.getParticipanteB().getNome() + " - Rodada " + p.getRodada() + "\n";
+        // Separa a impressão por rodadas.
+        for (int i = 1; i < participantes.size(); i++) {
+            tabela += "\n===== Rodada " + i + " =====\n";
+
+            for (Partida p : partidas) {
+                if (p.getRodada() == i){
+                    tabela += p.getParticipanteA().getNome() + " X " + p.getParticipanteB().getNome() + "\n";
+                }
+            }
         }
 
         return tabela;
