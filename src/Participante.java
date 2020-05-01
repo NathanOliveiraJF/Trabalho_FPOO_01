@@ -44,7 +44,7 @@ public class Participante {
         this.bonusArtilheiro = bonusArtilheiro;
     }
 
-    public int calcularPontos() {
+    public int calculaPontos() {
         return 0;
     }
 
