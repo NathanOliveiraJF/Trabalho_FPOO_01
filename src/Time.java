@@ -1,17 +1,21 @@
 import java.util.ArrayList;
 
 public class Time {
-    private ArrayList<Jogador>jogadores = new ArrayList<>();
+    private ArrayList<Jogador>jogadores;
     private String nome;
 
-    public Time() {}
+    public Time() {
+        jogadores = new ArrayList<>();
+    }
     public Time (String nome) {
+        jogadores = new ArrayList<>();
         this.nome = nome;
     }
 
     public void addJogador(Jogador jogador) {
         this.jogadores.add(jogador);
     }
+
     public ArrayList<Jogador> getJogadores() {
         return this.jogadores;
     }
@@ -27,6 +31,14 @@ public class Time {
     }
 
     public Jogador artilheiro() {
-        return new Jogador();
+        Jogador jogador = new Jogador();
+
+        for(Jogador jog : this.jogadores){
+            if(jog.getGol() > jogador.getGol()) {
+                jogador = jog;
+            }
+        }
+
+        return jogador;
     }
 }

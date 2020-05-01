@@ -14,10 +14,11 @@ public class Jogador {
         this.nome = nome;
     }
 
-    public int getGols() {
+    public int getGol() {
         return gols;
     }
-    public void addGols(int gols) {
+
+    public void addGol(int gols) {
         this.gols += gols;
     }
 }
