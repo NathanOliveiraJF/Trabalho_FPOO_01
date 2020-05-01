@@ -7,13 +7,7 @@ public class Participante {
     private boolean bonusArtilheiro;
     private Time time;
 
-    public Participante() {
-        this.nome = "";
-        this.golsFeitos = 0;
-        this.golsSofridos = 0;
-        this.vitorias = 0;
-        this.bonusArtilheiro = false;
-    }
+    public Participante() {}
     public Participante(String nome) {
         this.nome = nome;
         this.golsFeitos = 0;

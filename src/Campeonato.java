@@ -11,14 +11,14 @@ public class Campeonato {
         partidas =  new ArrayList<Partida>();
     }
 
-    private void cadastraParticipante(Participante participante) {
+    public void cadastraParticipante(Participante participante) {
         this.participantes.add(participante);
     }
     public ArrayList<Participante> getParticipantes() {
         return participantes;
     }
 
-    public void geraTabelaJogos() {
+    public void geraTabelaPartidas() {
         //Gera a tabela com todas as partidas possiveis
         for (int i = 0; i < participantes.size(); i++) {
             Participante pA = participantes.get(i);
@@ -34,18 +34,18 @@ public class Campeonato {
 
         partidas = geraRodadas(partidas);
     }
-    public String getTabelaJogos() {
+    public String getTabelaPartidas() {
         String tabela = "";
 
         for (Partida p : partidas) {
-            tabela += p.getParticipanteA() + " X " + p.getParticipanteB() + " - Rodada " + p.getRodada() + "\n";
+            tabela += p.getParticipanteA().getNome() + " X " + p.getParticipanteB().getNome() + " - Rodada " + p.getRodada() + "\n";
         }
 
         return tabela;
     }
 
     private ArrayList<Partida> geraRodadas(ArrayList<Partida> partidas) {
-        ArrayList<Partida> partidasAux = new ArrayList<Partida>();
+        ArrayList<Partida> partidasAux = new ArrayList<>();
         boolean erro = true;
         while (erro) {
             for (Partida partida : partidas) {
@@ -56,7 +56,7 @@ public class Campeonato {
             partidasAux.addAll(partidas);
 
             //Número de rodadas
-            for (int i = 1; i <= (partidas.size() - 1); i++) {
+            for (int i = 1; i <= (participantes.size() - 1); i++) {
                 ArrayList<Partida> jogosRodada = new ArrayList<Partida>();
 
                 for (Partida jogo : partidasAux) {
@@ -65,7 +65,7 @@ public class Campeonato {
                     }
                 }
                 //Jogos por rodada
-                for (int j = 0; j < (partidas.size() / 2); j++) {
+                for (int j = 0; j < (participantes.size() / 2); j++) {
                     if (jogosRodada.isEmpty()) {
                         erro = true;
                         break;
