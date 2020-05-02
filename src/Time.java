@@ -42,4 +42,14 @@ public class Time {
 
         return jogador;
     }
+
+    public String imprimeJogador() {
+        String nomeJogador = "";
+
+        for(int i = 0; i < jogadores.size(); i++){
+            nomeJogador = "#" + ( i + 1) + " - " + jogadores.get(i).getNome();
+        }
+
+        return nomeJogador;
+    }
 }
