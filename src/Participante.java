@@ -59,7 +59,7 @@ public class Participante {
             pontos += 5;
         }
 
-        pontos += (3 * this.vitorias) + this.golsFeitos + (this.golsSofridos * 0.5);
+        pontos += (3 * this.vitorias) + this.golsFeitos - (this.golsSofridos * 0.5);
 
         return pontos ;
     }

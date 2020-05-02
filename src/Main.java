@@ -12,10 +12,15 @@ public class Main {
         System.out.println("│              Campeonato de Fifa               │");
         System.out.println("╰───────────────────────────────────────────────╯");
 
-        c.cadastraParticipante(new Participante("Breno"));
-        c.cadastraParticipante(new Participante("Maria"));
-        c.cadastraParticipante(new Participante("Joana"));
-        c.cadastraParticipante(new Participante("Nathan"));
+//        c.cadastraParticipante(new Participante("Breno"));
+//        c.getParticipantes().get(0).setTime(c.getTime(4));
+//        c.cadastraParticipante(new Participante("Nathan"));
+//        c.getParticipantes().get(1).setTime(c.getTime(7));
+//        c.cadastraParticipante(new Participante("Maria"));
+//        c.getParticipantes().get(2).setTime(c.getTime(1));
+//        c.cadastraParticipante(new Participante("Joana"));
+//        c.getParticipantes().get(3).setTime(c.getTime(3));
+
 
         while (continuar) {
             printMenu();
@@ -29,9 +34,12 @@ public class Main {
                     cadastraParticipante(c);
                     break;
                 case 2:
-                    iniciaCampeonato(c);
+                    System.out.println(c.getTabelaPartidas());
                     break;
                 case 3:
+                    iniciaCampeonato(c);
+                    break;
+                case 4:
                     imprimeRanking(c);
                     break;
                 case 0:
@@ -46,8 +54,9 @@ public class Main {
     private static void printMenu() {
         System.out.println("╭───────────────────────────────────────────────╮");
         System.out.println("│ [1] Cadastrar participantes                   │");
-        System.out.println("│ [2] Iniciar campeonato                        │");
-        System.out.println("│ [3] Imprimir ranking                          │");
+        System.out.println("│ [2] Listas rodadas                            │");
+        System.out.println("│ [3] Iniciar campeonato                        │");
+        System.out.println("│ [4] Imprimir ranking                          │");
         System.out.println("│ [0] Sair do programa                          │");
         System.out.println("╰───────────────────────────────────────────────╯");
     }
@@ -86,32 +95,56 @@ public class Main {
 
     private static void iniciaCampeonato(Campeonato c) {
         Scanner read = new Scanner(System.in);
-        System.out.println(c.getTabelaPartidas());
+        if (c.getPartidas().size() == 0) c.geraTabelaPartidas();
 
         for (Partida p : c.getPartidas()) {
             System.out.println("Informe o resultado da partida");
             System.out.println(p.getParticipanteA().getNome() + " X " + p.getParticipanteB().getNome());
 
             System.out.print("Gols feitos por " + p.getParticipanteA().getNome() + ": ");
-            p.setGolsA(read.nextInt());
+            int golsA = read.nextInt();
             read.nextLine();
-            p.getParticipanteA().addGolFeito(p.getGolsA());
-            p.getParticipanteB().addGolSofrido(p.getGolsA());
-            // Perguntar quem foi o jogador que fez cada um dos gols.
+
+            registraGolJogador(p.getParticipanteA().getTime(), golsA);
 
             System.out.print("Gols feitos por " + p.getParticipanteB().getNome() + ": ");
-            p.setGolsB(read.nextInt());
+            int golsB = read.nextInt();
             read.nextLine();
-            p.getParticipanteB().addGolFeito(p.getGolsB());
-            p.getParticipanteA().addGolSofrido(p.getGolsB());
-            // Perguntar quem foi o jogador que fez cada um dos gols.
 
-            p.defineGanhador().addVitoria();
+            registraGolJogador(p.getParticipanteB().getTime(), golsB);
+
+            registraPlacar(p, golsA, golsB);
             System.out.println();
         }
     }
 
     private static void imprimeRanking(Campeonato c) {
         System.out.println(c.geraRanking());
+    }
+
+    private static void registraPlacar(Partida p, int golsA, int golsB) {
+        p.setGolsA(golsA);
+        p.getParticipanteA().addGolFeito(golsA);
+        p.getParticipanteA().addGolSofrido(golsB);
+
+        p.setGolsB(golsB);
+        p.getParticipanteB().addGolFeito(golsB);
+        p.getParticipanteB().addGolSofrido(golsA);
+
+        p.defineGanhador().addVitoria();
+    }
+
+    private static void registraGolJogador(Time t, int gols) {
+        if (gols > 0) {
+            Scanner read = new Scanner(System.in);
+
+            System.out.println(t.listaJogador());
+
+            for (int i = 0; i < gols; i++) {
+                System.out.print("Jogador que marcou o gol " + (i + 1) + ": ");
+                t.getJogador((read.nextInt() - 1)).addGol(1);
+                read.nextLine();
+            }
+        }
     }
 }

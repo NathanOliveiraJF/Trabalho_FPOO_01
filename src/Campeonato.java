@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -53,7 +52,7 @@ public class Campeonato {
         return timesDisponiveis;
     }
 
-    private void geraTabelaPartidas() {
+    public void geraTabelaPartidas() {
         //Gera a tabela com todas as partidas possiveis
         for (int i = 0; i < participantes.size(); i++) {
             Participante pA = participantes.get(i);
@@ -68,7 +67,10 @@ public class Campeonato {
         }
 
         partidas = geraRodadas(partidas);
+
+        ordenaPartidas(partidas);
     }
+
     public String getTabelaPartidas() {
         if (partidas.size() == 0) geraTabelaPartidas();
 
@@ -76,13 +78,14 @@ public class Campeonato {
 
         // Separa a impressão por rodadas.
         for (int i = 1; i < participantes.size(); i++) {
-            tabela += "\n===== Rodada " + i + " =====\n";
+            tabela += "\n╭──────────────────── Rodada " + i + " ─────────────────╮\n";
 
             for (Partida p : partidas) {
                 if (p.getRodada() == i){
-                    tabela += p.getParticipanteA().getNome() + " X " + p.getParticipanteB().getNome() + "\n";
+                    tabela += "  " + p.getParticipanteA().getNome() + " X " + p.getParticipanteB().getNome() + "\n";
                 }
             }
+            tabela += ("╰───────────────────────────────────────────────╯");
         }
 
         return tabela;
@@ -151,32 +154,57 @@ public class Campeonato {
     public String geraRanking() {
         String ranking = "";
 
-        ordenaLista(participantes);
+        // Recupera o artilheiro e dá o bônus ao participante.
+        String artilheiro = artilheiro().getNome();
+        int golsArtilheiro = artilheiro().getGols();
+
+        ordenaRanking(participantes);
 
         for (int i = 0; i < participantes.size(); i++) {
             ranking += "#" + (i + 1) + " - " + participantes.get(i).getNome() + "(" + participantes.get(i).calculaPontos() + ")\n";
         }
 
+        ranking += "Artilheiro: " + artilheiro + " (" + golsArtilheiro + " gols)\n";
+
         return ranking;
     }
 
-    private void ordenaLista(ArrayList<Participante> participantes) {
-        ordenaLista(participantes, participantes.size());
+    private void ordenaRanking(ArrayList<Participante> participantes) {
+        ordenaRanking(participantes, participantes.size());
     }
-    private void ordenaLista(ArrayList<Participante> participantes, int n) {
+    private void ordenaRanking(ArrayList<Participante> participantes, int n) {
         if (n == 1) return;
 
         for (int i = 0; i < n - 1; i++) {
             if (participantes.get(i).calculaPontos() < participantes.get(i + 1).calculaPontos()) {
-                troca(participantes, i, i + 1);
+                trocaParticipante(participantes, i, i + 1);
             }
 
-            ordenaLista(participantes, n - 1);
+            ordenaRanking(participantes, n - 1);
         }
     }
-
-    private void troca(ArrayList<Participante> part, int i, int j) {
+    private void trocaParticipante(ArrayList<Participante> part, int i, int j) {
         Participante aux = part.get(i);
+        part.set(i, part.get(j));
+        part.set(j, aux);
+    }
+
+    private void ordenaPartidas(ArrayList<Partida> partidas) {
+        ordenaPartidas(partidas, partidas.size());
+    }
+    private void ordenaPartidas(ArrayList<Partida> partidas, int n) {
+        if (n == 1) return;
+
+        for (int i = 0; i < n - 1; i++) {
+            if (partidas.get(i).getRodada() > partidas.get(i + 1).getRodada()) {
+                trocaPartida(partidas, i, i + 1);
+            }
+
+            ordenaPartidas(partidas, n - 1);
+        }
+    }
+    private void trocaPartida(ArrayList<Partida> part, int i, int j) {
+        Partida aux = part.get(i);
         part.set(i, part.get(j));
         part.set(j, aux);
     }

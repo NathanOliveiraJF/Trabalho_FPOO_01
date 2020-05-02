@@ -43,11 +43,11 @@ public class Time {
         return jogador;
     }
 
-    public String imprimeJogador() {
+    public String listaJogador() {
         String nomeJogador = "";
 
         for(int i = 0; i < jogadores.size(); i++){
-            nomeJogador = "#" + ( i + 1) + " - " + jogadores.get(i).getNome();
+            nomeJogador += "[" + ( i + 1) + "] " + jogadores.get(i).getNome() + "\n";
         }
 
         return nomeJogador;
