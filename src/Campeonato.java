@@ -151,6 +151,7 @@ public class Campeonato {
     public String geraRanking() {
         String ranking = "";
 
+        ordenaLista(participantes);
 
         for (int i = 0; i < participantes.size(); i++) {
             ranking += "#" + (i + 1) + " - " + participantes.get(i).getNome() + "(" + participantes.get(i).calculaPontos() + ")\n";
@@ -159,27 +160,23 @@ public class Campeonato {
         return ranking;
     }
 
+    private void ordenaLista(ArrayList<Participante> participantes) {
+        ordenaLista(participantes, participantes.size());
+    }
+    private void ordenaLista(ArrayList<Participante> participantes, int n) {
+        if (n == 1) return;
 
-    private void ordenaLista(){
-        int fim = participantes.size() - 1, pos = 0;
-        boolean troca = true;
-        while(troca){
-            troca = false;
-            for(int i = 0; i < fim; i++){
-                if(participantes.get(i).calculaPontos() < participantes.get(i + 1).calculaPontos()){
-                    Troca(participantes, i, i + 1);
-                    pos = i;
-                    troca = true;
-                }
-                fim = pos - 1;
+        for (int i = 0; i < n - 1; i++) {
+            if (participantes.get(i).calculaPontos() < participantes.get(i + 1).calculaPontos()) {
+                troca(participantes, i, i + 1);
             }
-        }
 
+            ordenaLista(participantes, n - 1);
+        }
     }
 
-    private void Troca(ArrayList<Participante> part, int i, int j) {
+    private void troca(ArrayList<Participante> part, int i, int j) {
         Participante aux = part.get(i);
-        //part.get(i) = part.get(j);
         part.set(i, part.get(j));
         part.set(j, aux);
     }

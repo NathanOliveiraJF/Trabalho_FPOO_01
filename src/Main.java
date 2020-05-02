@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        boolean continuar = true;
         Campeonato c = new Campeonato();
         Scanner read = new Scanner(System.in);
 
@@ -11,45 +12,35 @@ public class Main {
         System.out.println("│              Campeonato de Fifa               │");
         System.out.println("╰───────────────────────────────────────────────╯");
 
-        printMenu();
-        askForOption();
-
-        int option = read.nextInt();
-        read.nextLine();
-
-        switch (option) {
-            case 1:
-                cadastraParticipante(c);
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 0:
-                System.exit(0);
-                break;
-        }
-
-        Participante breno = new Participante("Breno");
-        breno.setTime(c.getTime(0));
-        c.cadastraParticipante(breno);
-
-        c.cadastraParticipante(new Participante("Nathan"));
-        c.cadastraParticipante(new Participante("Jorge"));
-        c.cadastraParticipante(new Participante("Gustavo"));
+        c.cadastraParticipante(new Participante("Breno"));
         c.cadastraParticipante(new Participante("Maria"));
-        c.cadastraParticipante(new Participante("Betânia"));
+        c.cadastraParticipante(new Participante("Joana"));
+        c.cadastraParticipante(new Participante("Nathan"));
 
-        System.out.println("Gerando a tabela de partidas...");
-        c.geraTabelaPartidas();
+        while (continuar) {
+            printMenu();
+            askForOption();
 
-        System.out.println("Imprimindo a tabela de partidas...");
-        System.out.print(c.getTabelaPartidas());
+            int option = read.nextInt();
+            read.nextLine();
 
-        System.out.println("\n===== Lista de times disponíveis ======");
-        System.out.println(c.listTimesDisponiveis());
-
-	    // Chama o metodo que popula a lista de times.
+            switch (option) {
+                case 1:
+                    cadastraParticipante(c);
+                    break;
+                case 2:
+                    iniciaCampeonato(c);
+                    break;
+                case 3:
+                    imprimeRanking(c);
+                    break;
+                case 0:
+                    continuar = false;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private static void printMenu() {
@@ -66,6 +57,61 @@ public class Main {
     }
 
     private static void cadastraParticipante(Campeonato c) {
-        c.cadastraParticipante(new Participante("Breno"));
+        Scanner read = new Scanner(System.in);
+        boolean continuar = true;
+
+        while (continuar) {
+            System.out.print("Nome do participante: ");
+            Participante novoParticipante = new Participante(read.nextLine());
+
+            listaTimesDisponiveis(c);
+            System.out.print("Escolha o seu time: ");
+            int time = read.nextInt();
+            read.nextLine();
+
+            novoParticipante.setTime(c.getTime(time - 1));
+            c.cadastraParticipante(novoParticipante);
+
+            System.out.print("Cadastra um novo participante? [s/n] ");
+            continuar = read.nextLine().toLowerCase().equals("s");
+        }
+    }
+
+    private static void listaTimesDisponiveis(Campeonato c) {
+        System.out.println("╭───────────────────────────────────────────────╮");
+        System.out.println("│           Lista de times disponíveis          │");
+        System.out.println("╰───────────────────────────────────────────────╯");
+        System.out.println(c.listTimesDisponiveis());
+    }
+
+    private static void iniciaCampeonato(Campeonato c) {
+        Scanner read = new Scanner(System.in);
+        System.out.println(c.getTabelaPartidas());
+
+        for (Partida p : c.getPartidas()) {
+            System.out.println("Informe o resultado da partida");
+            System.out.println(p.getParticipanteA().getNome() + " X " + p.getParticipanteB().getNome());
+
+            System.out.print("Gols feitos por " + p.getParticipanteA().getNome() + ": ");
+            p.setGolsA(read.nextInt());
+            read.nextLine();
+            p.getParticipanteA().addGolFeito(p.getGolsA());
+            p.getParticipanteB().addGolSofrido(p.getGolsA());
+            // Perguntar quem foi o jogador que fez cada um dos gols.
+
+            System.out.print("Gols feitos por " + p.getParticipanteB().getNome() + ": ");
+            p.setGolsB(read.nextInt());
+            read.nextLine();
+            p.getParticipanteB().addGolFeito(p.getGolsB());
+            p.getParticipanteA().addGolSofrido(p.getGolsB());
+            // Perguntar quem foi o jogador que fez cada um dos gols.
+
+            p.defineGanhador().addVitoria();
+            System.out.println();
+        }
+    }
+
+    private static void imprimeRanking(Campeonato c) {
+        System.out.println(c.geraRanking());
     }
 }
