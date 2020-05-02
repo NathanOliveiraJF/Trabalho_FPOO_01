@@ -23,6 +23,10 @@ public class Campeonato {
         return participantes;
     }
 
+    public ArrayList<Partida> getPartidas() {
+        return partidas;
+    }
+
     public void cadastraTime(Time time) {
         this.times.add(time);
     }
@@ -43,13 +47,13 @@ public class Campeonato {
         }
 
         for (Time t : timesAux) {
-            timesDisponiveis += t.getNome() + "\n";
+            timesDisponiveis += "[" + (times.indexOf(t) + 1) + "] " + t.getNome() + "\n";
         }
 
         return timesDisponiveis;
     }
 
-    public void geraTabelaPartidas() {
+    private void geraTabelaPartidas() {
         //Gera a tabela com todas as partidas possiveis
         for (int i = 0; i < participantes.size(); i++) {
             Participante pA = participantes.get(i);
@@ -66,6 +70,8 @@ public class Campeonato {
         partidas = geraRodadas(partidas);
     }
     public String getTabelaPartidas() {
+        if (partidas.size() == 0) geraTabelaPartidas();
+
         String tabela = "";
 
         // Separa a impressão por rodadas.
@@ -145,11 +151,11 @@ public class Campeonato {
     public String geraRanking() {
         String ranking = "";
 
-        for (int i = 1; i <= participantes.size(); i++) {
-            ranking += "#" + i + " - " + participantes.get(i).getNome() + "(" + participantes.get(i).calculaPontos() + ")";
+        for (int i = 0; i < participantes.size(); i++) {
+            ranking += "#" + (i + 1) + " - " + participantes.get(i).getNome() + "(" + participantes.get(i).calculaPontos() + ")\n";
         }
 
-        return "";
+        return ranking;
     }
 
     public Participante vencedor(Participante participante) {
