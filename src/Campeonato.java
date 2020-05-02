@@ -151,11 +151,37 @@ public class Campeonato {
     public String geraRanking() {
         String ranking = "";
 
+
         for (int i = 0; i < participantes.size(); i++) {
             ranking += "#" + (i + 1) + " - " + participantes.get(i).getNome() + "(" + participantes.get(i).calculaPontos() + ")\n";
         }
 
         return ranking;
+    }
+
+
+    private void ordenaLista(){
+        int fim = participantes.size() - 1, pos = 0;
+        boolean troca = true;
+        while(troca){
+            troca = false;
+            for(int i = 0; i < fim; i++){
+                if(participantes.get(i).calculaPontos() < participantes.get(i + 1).calculaPontos()){
+                    Troca(participantes, i, i + 1);
+                    pos = i;
+                    troca = true;
+                }
+                fim = pos - 1;
+            }
+        }
+
+    }
+
+    private void Troca(ArrayList<Participante> part, int i, int j) {
+        Participante aux = part.get(i);
+        //part.get(i) = part.get(j);
+        part.set(i, part.get(j));
+        part.set(j, aux);
     }
 
     public Participante vencedor(Participante participante) {
